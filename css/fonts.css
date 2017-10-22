@@ -1,48 +1,50 @@
+@charset "UTF-8";
+
 @font-face {
   font-family: Cantarell;
   font-style: normal;
   font-weight: normal;
-  src: url('Cantarell-Regular.ttf');
+  src: url('../fonts/Cantarell-Regular.ttf');
 }
 
 @font-face {
   font-family: Cantarell;
   font-style: italic;
   font-weight: normal;
-  src: url('Cantarell-Oblique.ttf');
+  src: url('../fonts/Cantarell-Oblique.ttf');
 }
 
 @font-face {
   font-family: Cantarell;
   font-style: oblique;
   font-weight: normal;
-  src: url('Cantarell-Oblique.ttf');
+  src: url('../fonts/Cantarell-Oblique.ttf');
 }
 
 @font-face {
   font-family: Cantarell;
   font-style: normal;
   font-weight: bold;
-  src: url('Cantarell-Bold.ttf');
+  src: url('../fonts/Cantarell-Bold.ttf');
 }
 
 @font-face {
   font-family: Cantarell;
   font-style: italic;
   font-weight: bold;
-  src: url('Cantarell-BoldOblique.ttf');
+  src: url('../fonts/Cantarell-BoldOblique.ttf');
 }
 
 @font-face {
   font-family: Cantarell;
   font-style: oblique;
   font-weight: bold;
-  src: url('Cantarell-BoldOblique.ttf');
+  src: url('../fonts/Cantarell-BoldOblique.ttf');
 }
 
 @font-face {
   font-family: Open Sans Condensed;
   font-style: normal;
   font-weight: normal;
-  src: url('OpenSansCondensed-Light.ttf');
+  src: url('../fonts/OpenSansCondensed-Light.ttf');
 }
