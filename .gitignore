@@ -47,3 +47,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /.metadata/
+
+# IDE project-specific
+.settings
+.project
