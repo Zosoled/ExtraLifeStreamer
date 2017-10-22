@@ -18,7 +18,7 @@ function refreshData() {
   donations = new Set();
   
   requestParticipantData();
-  requestDonationData();
+  // requestDonationData();
   
   function requestParticipantData() {
     var request = new XMLHttpRequest();
@@ -52,8 +52,8 @@ function refreshData() {
             donations.add(response[i]);
         }
         
-        clearChildren("donationList");
         var donationList = document.getElementById("donationList");
+        clearChildren(donationList);
         for (var d of donations) {
           var itemText = d.donorName ? d.donorName : "Anonymous";
           var textNode = document.createTextNode(itemText);
@@ -67,10 +67,9 @@ function refreshData() {
     request.send();
   }
   
-  function clearChildren(id) {
-    var node = document.getElementById(id);
-    while (node.firstChild) {
-      node.removeChild(node.firstChild);
+  function clearChildren(e) {
+    while (e.hasChildNodes()) {
+      e.removeChild(e.lastChild);
     }
   }
   
