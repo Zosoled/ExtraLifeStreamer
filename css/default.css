@@ -1,0 +1,16 @@
+@import "fonts.css";
+
+html, body, div, span {
+  border: 0;
+  font-family: Cantarell;
+  line-height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.meter {
+  background-color: #ccc;
+  border-radius: .5em;
+  color: #fff;
+  padding: .5em;
+}
