@@ -26,17 +26,12 @@ function refreshData() {
       if (request.readyState == 4 && request.status == 200) {
         var response = JSON.parse(request.responseText);
         var width = (response.totalRaisedAmount / response.fundraisingGoal * 100).toFixed(0);
-        var hp = document.getElementById("hp");
-        var meterGradient = "linear-gradient(90deg, " +
-            LIGHT_GREEN_HEX + " " + makePercentString(width) + ", " +
-            DARK_BLUE_HEX + " " + makePercentString(width) + ", " +
-            DARK_BLUE_HEX + " 100%)";
-        var meterBorder = ".1em solid " + LIGHT_BLUE_HEX;
-        hp.style.backgroundImage = meterGradient;
-        hp.style.border = meterBorder;
-        hp.innerHTML = "&#36;" + response.totalRaisedAmount;
-        hp.innerHTML += " / ";
-        hp.innerHTML += "&#36;" + response.fundraisingGoal;
+        var fill = document.getElementById("fill");
+        var text = document.getElementById("text");
+        fill.style.width = percentString(width);
+        text.innerHTML = "&#36;" + response.totalRaisedAmount;
+        text.innerHTML += " / ";
+        text.innerHTML += "&#36;" + response.fundraisingGoal;
       }
     };
     request.open("GET", PARTICIPANT_URL + PARTICIPANT_ID);
@@ -81,6 +76,6 @@ function clearChildren(e) {
   }
 }
 
-function makePercentString(i) {
+function percentString(i) {
   return i.toString() + "%";
 }

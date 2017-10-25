@@ -43,6 +43,13 @@
 }
 
 @font-face {
+  font-family: Furore;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/Furore.otf');
+}
+
+@font-face {
   font-family: Open Sans Condensed;
   font-style: normal;
   font-weight: normal;
