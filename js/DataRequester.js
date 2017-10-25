@@ -15,8 +15,6 @@ function main() {
 }
 
 function refreshData() {
-  donations = new Set();
-  
   requestParticipant();
   // requestDonations();
   
@@ -38,21 +36,17 @@ function refreshData() {
   function requestDonations() {
     var url = DONATIONS_URL + PARTICIPANT_ID;
     xhr(url, function(response) {
-      var donationList = JSON.parse(response);
-      for (var i = 0; i < donationList.length; i++) {
-        donations.add(donationList[i]);
+      donations = JSON.parse(response);
+      var donationList = document.getElementById("donationList");
+      clearChildren(donationList);
+      for (let d of donations) {
+        var itemText = d.donorName ? d.donorName : "Anonymous";
+        var textNode = document.createTextNode(itemText);
+        var listItem = document.createElement("li");
+        listItem.appendChild(textNode);
+        donationList.appendChild(listItem);
       }
     });
-    
-    var donationList = document.getElementById("donationList");
-    clearChildren(donationList);
-    for (var d of donations) {
-      var itemText = d.donorName ? d.donorName : "Anonymous";
-      var textNode = document.createTextNode(itemText);
-      var listItem = document.createElement("li");
-      listItem.appendChild(textNode);
-      donationList.appendChild(listItem);
-    }
   }
 }
 
