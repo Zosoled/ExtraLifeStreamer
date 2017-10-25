@@ -17,37 +17,37 @@ function main() {
 function refreshData() {
   requestParticipant();
   // requestDonations();
-  
-  function requestParticipant() {
-    var url = PARTICIPANT_URL + PARTICIPANT_ID;
-    xhr(url, function(response) {
-      participant = JSON.parse(response);
-      var fill = document.getElementById("fill");
-      var text = document.getElementById("text");
-      if (fill && text) {
-        fill.style.width = calculatePercentage();
-        text.innerHTML = "$" + participant.totalRaisedAmount;
-        text.innerHTML += " / ";
-        text.innerHTML += "$" + participant.fundraisingGoal;
-      }
-    });
-  }
-  
-  function requestDonations() {
-    var url = DONATIONS_URL + PARTICIPANT_ID;
-    xhr(url, function(response) {
-      donations = JSON.parse(response);
-      var donationList = document.getElementById("donationList");
-      clearChildren(donationList);
-      for (let d of donations) {
-        var itemText = d.donorName ? d.donorName : "Anonymous";
-        var textNode = document.createTextNode(itemText);
-        var listItem = document.createElement("li");
-        listItem.appendChild(textNode);
-        donationList.appendChild(listItem);
-      }
-    });
-  }
+}
+
+function requestParticipant() {
+  var url = PARTICIPANT_URL + PARTICIPANT_ID;
+  xhr(url, function(response) {
+    participant = JSON.parse(response);
+    var fill = document.getElementById("fill");
+    var text = document.getElementById("text");
+    if (fill && text) {
+      fill.style.width = calculatePercentage();
+      text.innerHTML = "$" + participant.totalRaisedAmount;
+      text.innerHTML += " / ";
+      text.innerHTML += "$" + participant.fundraisingGoal;
+    }
+  });
+}
+
+function requestDonations() {
+  var url = DONATIONS_URL + PARTICIPANT_ID;
+  xhr(url, function(response) {
+    donations = JSON.parse(response);
+    var donationList = document.getElementById("donationList");
+    clearChildren(donationList);
+    for (let d of donations) {
+      var itemText = d.donorName ? d.donorName : "Anonymous";
+      var textNode = document.createTextNode(itemText);
+      var listItem = document.createElement("li");
+      listItem.appendChild(textNode);
+      donationList.appendChild(listItem);
+    }
+  });
 }
 
 function xhr(file, callback) {
