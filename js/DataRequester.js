@@ -1,4 +1,3 @@
-const PARTICIPANT_ID = "249219";
 const PARTICIPANT_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participant&format=json&participantID=";
 const DONATIONS_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participantDonations&format=json&participantID=";
 
@@ -6,7 +5,10 @@ const DARK_BLUE_HEX = "#1d4c6c";
 const LIGHT_BLUE_HEX = "#23c1e8";
 const LIGHT_GREEN_HEX = "#96d400";
 
+var id;
 var participant;
+var team;
+var teamParticipants;
 var donations;
 
 function main() {
@@ -15,12 +17,20 @@ function main() {
 }
 
 function refreshAllData() {
+  getId();
   refreshParticipant();
   refreshDonations();
 }
 
+function getId() {
+  id = window.location.search.slice(1);
+  if (id.length != 6) {
+    throw "Invalid ID";
+  }
+}
+
 function refreshParticipant() {
-  var url = PARTICIPANT_URL + PARTICIPANT_ID;
+  var url = PARTICIPANT_URL + id;
   getDataAndProcessIt(url, function(response) {
     participant = JSON.parse(response);
     var fill = document.getElementById("fill");
@@ -35,7 +45,7 @@ function refreshParticipant() {
 }
 
 function refreshDonations() {
-  var url = DONATIONS_URL + PARTICIPANT_ID;
+  var url = DONATIONS_URL + id;
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
     var donationListElement = document.getElementById("donations");
