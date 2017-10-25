@@ -39,13 +39,15 @@ function refreshDonations() {
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
     var donationList = document.getElementById("donationList");
-    clearChildren(donationList);
-    for (let d of donations) {
-      var itemText = d.donorName ? d.donorName : "Anonymous";
-      var textNode = document.createTextNode(itemText);
-      var listItem = document.createElement("li");
-      listItem.appendChild(textNode);
-      donationList.appendChild(listItem);
+    if (donationList) {
+      clearChildren(donationList);
+      for (let d of donations) {
+        var itemText = d.donorName ? d.donorName : "Anonymous";
+        var textNode = document.createTextNode(itemText);
+        var listItem = document.createElement("li");
+        listItem.appendChild(textNode);
+        donationList.appendChild(listItem);
+      }
     }
   });
 }
