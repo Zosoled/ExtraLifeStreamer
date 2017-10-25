@@ -21,7 +21,7 @@ function refreshData() {
 
 function requestParticipant() {
   var url = PARTICIPANT_URL + PARTICIPANT_ID;
-  xhr(url, function(response) {
+  getDataAndProcessIt(url, function(response) {
     participant = JSON.parse(response);
     var fill = document.getElementById("fill");
     var text = document.getElementById("text");
@@ -36,7 +36,7 @@ function requestParticipant() {
 
 function requestDonations() {
   var url = DONATIONS_URL + PARTICIPANT_ID;
-  xhr(url, function(response) {
+  getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
     var donationList = document.getElementById("donationList");
     clearChildren(donationList);
@@ -50,7 +50,7 @@ function requestDonations() {
   });
 }
 
-function xhr(file, callback) {
+function getDataAndProcessIt(file, callback) {
   var x = new XMLHttpRequest();
   x.onreadystatechange = function() {
     if (x.readyState == 4 && x.status == 200) {
