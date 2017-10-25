@@ -38,15 +38,15 @@ function refreshDonations() {
   var url = DONATIONS_URL + PARTICIPANT_ID;
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
-    var donationList = document.getElementById("donationList");
-    if (donationList) {
-      clearChildren(donationList);
+    var donationListElement = document.getElementById("donations");
+    if (donationListElement) {
+      clearChildren(donationListElement);
       for (let d of donations) {
         var itemText = d.donorName ? d.donorName : "Anonymous";
         var textNode = document.createTextNode(itemText);
         var listItem = document.createElement("li");
         listItem.appendChild(textNode);
-        donationList.appendChild(listItem);
+        donationListElement.appendChild(listItem);
       }
     }
   });
