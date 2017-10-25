@@ -42,7 +42,9 @@ function refreshDonations() {
     if (donationListElement) {
       clearChildren(donationListElement);
       for (let d of donations) {
-        var itemText = d.donorName ? d.donorName : "Anonymous";
+        var itemText = d.donationAmount ? "$" + d.donationAmount : "Amount hidden";
+        itemText += " - ";
+        itemText += d.donorName ? d.donorName : "Anonymous";
         var textNode = document.createTextNode(itemText);
         var listItem = document.createElement("li");
         listItem.appendChild(textNode);
