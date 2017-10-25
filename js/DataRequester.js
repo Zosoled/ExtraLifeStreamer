@@ -61,6 +61,10 @@ function xhr(file, callback) {
   x.send();
 }
 
+function calculatePercentage() {
+  var p = participant.totalRaisedAmount / participant.fundraisingGoal * 100;
+  return percentString(p.toFixed(0));
+}
 function clearChildren(e) {
   while (e.hasChildNodes()) {
     e.removeChild(e.lastChild);
