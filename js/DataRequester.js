@@ -17,10 +17,10 @@ function main() {
 function refreshData() {
   donations = new Set();
   
-  requestParticipantData();
-  // requestDonationData();
+  requestParticipant();
+  // requestDonations();
   
-  function requestParticipantData() {
+  function requestParticipant() {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
@@ -43,37 +43,44 @@ function refreshData() {
     request.send();
   }
   
-  function requestDonationData() {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        for (var i = 0; i < response.length; i++) {
-            donations.add(response[i]);
-        }
-        
-        var donationList = document.getElementById("donationList");
-        clearChildren(donationList);
-        for (var d of donations) {
-          var itemText = d.donorName ? d.donorName : "Anonymous";
-          var textNode = document.createTextNode(itemText);
-          var listItem = document.createElement("li");
-          listItem.appendChild(textNode);
-          donationList.appendChild(listItem);
-        }
+  function requestDonations() {
+    var url = DONATIONS_URL + PARTICIPANT_ID;
+    xhr(url, function(response) {
+      var donationList = JSON.parse(response);
+      for (var i = 0; i < donationList.length; i++) {
+        donations.add(donationList[i]);
       }
-    };
-    request.open("GET", DONATIONS_URL + PARTICIPANT_ID);
-    request.send();
-  }
-  
-  function clearChildren(e) {
-    while (e.hasChildNodes()) {
-      e.removeChild(e.lastChild);
+    });
+    
+    var donationList = document.getElementById("donationList");
+    clearChildren(donationList);
+    for (var d of donations) {
+      var itemText = d.donorName ? d.donorName : "Anonymous";
+      var textNode = document.createTextNode(itemText);
+      var listItem = document.createElement("li");
+      listItem.appendChild(textNode);
+      donationList.appendChild(listItem);
     }
   }
-  
-  function makePercentString(i) {
-    return i.toString() + "%";
+}
+
+function xhr(file, callback) {
+  var x = new XMLHttpRequest();
+  x.onreadystatechange = function() {
+    if (x.readyState == 4 && x.status == 200) {
+      callback(x.responseText);
+    }
   }
+  x.open('GET', file);
+  x.send();
+}
+
+function clearChildren(e) {
+  while (e.hasChildNodes()) {
+    e.removeChild(e.lastChild);
+  }
+}
+
+function makePercentString(i) {
+  return i.toString() + "%";
 }
