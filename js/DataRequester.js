@@ -21,21 +21,18 @@ function refreshData() {
   // requestDonations();
   
   function requestParticipant() {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        var width = (response.totalRaisedAmount / response.fundraisingGoal * 100).toFixed(0);
-        var fill = document.getElementById("fill");
-        var text = document.getElementById("text");
-        fill.style.width = percentString(width);
+    var url = PARTICIPANT_URL + PARTICIPANT_ID;
+    xhr(url, function(response) {
+      participant = JSON.parse(response);
+      var fill = document.getElementById("fill");
+      var text = document.getElementById("text");
+      if (fill && text) {
+        fill.style.width = calculatePercentage();
         text.innerHTML = "&#36;" + response.totalRaisedAmount;
         text.innerHTML += " / ";
         text.innerHTML += "&#36;" + response.fundraisingGoal;
       }
-    };
-    request.open("GET", PARTICIPANT_URL + PARTICIPANT_ID);
-    request.send();
+    });
   }
   
   function requestDonations() {
