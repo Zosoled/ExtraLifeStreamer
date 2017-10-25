@@ -14,12 +14,12 @@ function main() {
   setInterval(refreshData, 60000);
 }
 
-function refreshData() {
-  requestParticipant();
-  // requestDonations();
+function refreshAllData() {
+  refreshParticipant();
+  // refreshDonations();
 }
 
-function requestParticipant() {
+function refreshParticipant() {
   var url = PARTICIPANT_URL + PARTICIPANT_ID;
   getDataAndProcessIt(url, function(response) {
     participant = JSON.parse(response);
@@ -34,7 +34,7 @@ function requestParticipant() {
   });
 }
 
-function requestDonations() {
+function refreshDonations() {
   var url = DONATIONS_URL + PARTICIPANT_ID;
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
