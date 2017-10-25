@@ -26,9 +26,9 @@ function refreshData() {
       var text = document.getElementById("text");
       if (fill && text) {
         fill.style.width = calculatePercentage();
-        text.innerHTML = "&#36;" + response.totalRaisedAmount;
+        text.innerHTML = "$" + participant.totalRaisedAmount;
         text.innerHTML += " / ";
-        text.innerHTML += "&#36;" + response.fundraisingGoal;
+        text.innerHTML += "$" + participant.fundraisingGoal;
       }
     });
   }
