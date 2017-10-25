@@ -10,13 +10,13 @@ var participant;
 var donations;
 
 function main() {
-  refreshData();
-  setInterval(refreshData, 60000);
+  refreshAllData();
+  setInterval(refreshAllData, 60000);
 }
 
 function refreshAllData() {
   refreshParticipant();
-  // refreshDonations();
+  refreshDonations();
 }
 
 function refreshParticipant() {
