@@ -15,14 +15,16 @@ var teamParticipants;
 var donations;
 
 function main() {
+  getId();
   refreshAllData();
   setInterval(refreshAllData, 60000);
 }
 
 function refreshAllData() {
-  getId();
   refreshParticipant();
   refreshDonations();
+  refreshTeam();
+  refreshTeamParticipants();
 }
 
 function getId() {
