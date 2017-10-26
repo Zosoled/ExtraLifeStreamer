@@ -10,9 +10,9 @@ const LIGHT_GREEN_HEX = "#96d400";
 
 var id;
 var participant;
+var donations;
 var team;
 var teamParticipants;
-var donations;
 
 function main() {
   getId();
