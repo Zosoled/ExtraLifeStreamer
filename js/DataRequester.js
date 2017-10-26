@@ -23,8 +23,10 @@ function main() {
 function refreshAllData() {
   refreshParticipant();
   refreshDonations();
-  refreshTeam();
-  refreshTeamParticipants();
+  if (participant) {
+    refreshTeam();
+    refreshTeamParticipants();
+  }
 }
 
 function getId() {
@@ -37,7 +39,12 @@ function getId() {
 function refreshParticipant() {
   let url = PARTICIPANT_URL + id;
   retrieveData(url, function(response) {
-    participant = JSON.parse(response);
+    if (!participant) {
+      participant = JSON.parse(response);
+      refreshAllData();
+    } else {
+      participant = JSON.parse(response);
+    }
     handleParticipant();
   });
 }
