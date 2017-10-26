@@ -35,7 +35,7 @@ function getId() {
 }
 
 function refreshParticipant() {
-  var url = PARTICIPANT_URL + id;
+  let url = PARTICIPANT_URL + id;
   getDataAndProcessIt(url, function(response) {
     participant = JSON.parse(response);
     var fill = document.getElementById("fill");
@@ -50,7 +50,7 @@ function refreshParticipant() {
 }
 
 function refreshDonations() {
-  var url = DONATIONS_URL + id;
+  let url = DONATIONS_URL + id;
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
     var donationListElement = document.getElementById("donations");
@@ -70,7 +70,7 @@ function refreshDonations() {
 }
 
 function getDataAndProcessIt(file, callback) {
-  var x = new XMLHttpRequest();
+  let x = new XMLHttpRequest();
   x.onreadystatechange = function() {
     if (x.readyState == 4 && x.status == 200) {
       callback(x.responseText);
@@ -81,7 +81,7 @@ function getDataAndProcessIt(file, callback) {
 }
 
 function calculatePercentage() {
-  var p = participant.totalRaisedAmount / participant.fundraisingGoal * 100;
+  let p = participant.totalRaisedAmount / participant.fundraisingGoal * 100;
   return percentString(p.toFixed(0));
 }
 function clearChildren(e) {
