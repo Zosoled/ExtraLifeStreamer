@@ -38,14 +38,7 @@ function refreshParticipant() {
   let url = PARTICIPANT_URL + id;
   getDataAndProcessIt(url, function(response) {
     participant = JSON.parse(response);
-    var fill = document.getElementById("fill");
-    var text = document.getElementById("text");
-    if (fill && text) {
-      fill.style.width = calculatePercentage();
-      text.innerHTML = "$" + participant.totalRaisedAmount;
-      text.innerHTML += " / ";
-      text.innerHTML += "$" + participant.fundraisingGoal;
-    }
+    handleParticipant();
   });
 }
 
@@ -53,19 +46,7 @@ function refreshDonations() {
   let url = DONATIONS_URL + id;
   getDataAndProcessIt(url, function(response) {
     donations = JSON.parse(response);
-    var donationListElement = document.getElementById("donations");
-    if (donationListElement) {
-      clearChildren(donationListElement);
-      for (let d of donations) {
-        var itemText = d.donationAmount ? "$" + d.donationAmount : "Amount hidden";
-        itemText += " - ";
-        itemText += d.donorName ? d.donorName : "Anonymous";
-        var textNode = document.createTextNode(itemText);
-        var listItem = document.createElement("li");
-        listItem.appendChild(textNode);
-        donationListElement.appendChild(listItem);
-      }
-    }
+    handleDonations();
   });
 }
 
@@ -80,10 +61,38 @@ function getDataAndProcessIt(file, callback) {
   x.send();
 }
 
+function handleParticipant() {
+  let fill = document.getElementById("fill");
+  let text = document.getElementById("text");
+  if (fill && text) {
+    fill.style.width = calculatePercentage();
+    text.innerHTML = "$" + participant.totalRaisedAmount;
+    text.innerHTML += " / ";
+    text.innerHTML += "$" + participant.fundraisingGoal;
+  }
+}
+
+function handleDonations() {
+  let donationListElement = document.getElementById("donations");
+  if (donationListElement) {
+    clearChildren(donationListElement);
+    for (let d of donations) {
+      let itemText = d.donationAmount ? "$" + d.donationAmount : "Amount hidden";
+      itemText += " - ";
+      itemText += d.donorName ? d.donorName : "Anonymous";
+      let textNode = document.createTextNode(itemText);
+      let listItem = document.createElement("li");
+      listItem.appendChild(textNode);
+      donationListElement.appendChild(listItem);
+    }
+  }
+}
+
 function calculatePercentage() {
   let p = participant.totalRaisedAmount / participant.fundraisingGoal * 100;
   return percentString(p.toFixed(0));
 }
+
 function clearChildren(e) {
   while (e.hasChildNodes()) {
     e.removeChild(e.lastChild);
