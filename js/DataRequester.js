@@ -1,5 +1,8 @@
-const PARTICIPANT_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participant&format=json&participantID=";
-const DONATIONS_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participantDonations&format=json&participantID=";
+const BASE_URL = "https://www.extra-life.org/index.cfm?&format=json";
+const PARTICIPANT_URL = BASE_URL + "&fuseaction=donordrive.participant&participantID=";
+const DONATIONS_URL = BASE_URL + "&fuseaction=donordrive.participantDonations&participantID=";
+const TEAM_URL = BASE_URL + "&fuseaction=donordrive.team&teamID=";
+const TEAM_PARTICIPANTS_URL = BASE_URL + "&fuseaction=donordrive.teamParticipants&teamID=";
 
 const DARK_BLUE_HEX = "#1d4c6c";
 const LIGHT_BLUE_HEX = "#23c1e8";
