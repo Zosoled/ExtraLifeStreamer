@@ -36,7 +36,7 @@ function getId() {
 
 function refreshParticipant() {
   let url = PARTICIPANT_URL + id;
-  getDataAndProcessIt(url, function(response) {
+  retrieveData(url, function(response) {
     participant = JSON.parse(response);
     handleParticipant();
   });
@@ -44,7 +44,7 @@ function refreshParticipant() {
 
 function refreshDonations() {
   let url = DONATIONS_URL + id;
-  getDataAndProcessIt(url, function(response) {
+  retrieveData(url, function(response) {
     donations = JSON.parse(response);
     handleDonations();
   });
@@ -52,7 +52,7 @@ function refreshDonations() {
 
 function refreshTeam() {
   let url = TEAM_URL + participant.teamID;
-  getDataAndProcessIt(url, function(response) {
+  retrieveData(url, function(response) {
     team = JSON.parse(response);
     // add call to team handling here
   });
@@ -60,13 +60,13 @@ function refreshTeam() {
 
 function refreshTeamParticipants() {
   let url = TEAM_PARTICIPANTS_URL + participant.teamID;
-  getDataAndProcessIt(url, function(response) {
+  retrieveData(url, function(response) {
     team = JSON.parse(response);
     // add call to team participants handling here
   });
 }
 
-function getDataAndProcessIt(file, callback) {
+function retrieveData(file, callback) {
   let x = new XMLHttpRequest();
   x.onreadystatechange = function() {
     if (x.readyState == 4 && x.status == 200) {
