@@ -1,66 +1,80 @@
-const PARTICIPANT_ID = "249219";
-const PARTICIPANT_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participant&format=json&participantID=";
-const DONATIONS_URL = "https://www.extra-life.org/index.cfm?fuseaction=donordrive.participantDonations&format=json&participantID=";
+const BASE_URL = "https://www.extra-life.org/index.cfm?&format=json";
+const PARTICIPANT_URL = BASE_URL + "&fuseaction=donordrive.participant&participantID=";
+const DONATIONS_URL = BASE_URL + "&fuseaction=donordrive.participantDonations&participantID=";
+const TEAM_URL = BASE_URL + "&fuseaction=donordrive.team&teamID=";
+const TEAM_PARTICIPANTS_URL = BASE_URL + "&fuseaction=donordrive.teamParticipants&teamID=";
 
 const DARK_BLUE_HEX = "#1d4c6c";
 const LIGHT_BLUE_HEX = "#23c1e8";
 const LIGHT_GREEN_HEX = "#96d400";
 
+var id;
 var participant;
 var donations;
+var team;
+var teamParticipants;
 
 function main() {
-  refreshData();
-  setInterval(refreshData, 60000);
+  getId();
+  refreshAllData();
+  setInterval(refreshAllData, 60000);
 }
 
-function refreshData() {
-  donations = new Set();
-  
-  requestParticipant();
-  // requestDonations();
-  
-  function requestParticipant() {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        var width = (response.totalRaisedAmount / response.fundraisingGoal * 100).toFixed(0);
-        var fill = document.getElementById("fill");
-        var text = document.getElementById("text");
-        fill.style.width = percentString(width);
-        text.innerHTML = "&#36;" + response.totalRaisedAmount;
-        text.innerHTML += " / ";
-        text.innerHTML += "&#36;" + response.fundraisingGoal;
-      }
-    };
-    request.open("GET", PARTICIPANT_URL + PARTICIPANT_ID);
-    request.send();
+function refreshAllData() {
+  refreshParticipant();
+  refreshDonations();
+  if (participant) {
+    refreshTeam();
+    refreshTeamParticipants();
   }
-  
-  function requestDonations() {
-    var url = DONATIONS_URL + PARTICIPANT_ID;
-    xhr(url, function(response) {
-      var donationList = JSON.parse(response);
-      for (var i = 0; i < donationList.length; i++) {
-        donations.add(donationList[i]);
-      }
-    });
-    
-    var donationList = document.getElementById("donationList");
-    clearChildren(donationList);
-    for (var d of donations) {
-      var itemText = d.donorName ? d.donorName : "Anonymous";
-      var textNode = document.createTextNode(itemText);
-      var listItem = document.createElement("li");
-      listItem.appendChild(textNode);
-      donationList.appendChild(listItem);
+}
+
+function getId() {
+  id = window.location.search.slice(1);
+  if (id.length != 6) {
+    throw "Invalid ID";
+  }
+}
+
+function refreshParticipant() {
+  let url = PARTICIPANT_URL + id;
+  retrieveData(url, function(response) {
+    if (!participant) {
+      participant = JSON.parse(response);
+      refreshAllData();
+    } else {
+      participant = JSON.parse(response);
     }
-  }
+    handleParticipant();
+  });
 }
 
-function xhr(file, callback) {
-  var x = new XMLHttpRequest();
+function refreshDonations() {
+  let url = DONATIONS_URL + id;
+  retrieveData(url, function(response) {
+    donations = JSON.parse(response);
+    handleDonations();
+  });
+}
+
+function refreshTeam() {
+  let url = TEAM_URL + participant.teamID;
+  retrieveData(url, function(response) {
+    team = JSON.parse(response);
+    // add call to team handling here
+  });
+}
+
+function refreshTeamParticipants() {
+  let url = TEAM_PARTICIPANTS_URL + participant.teamID;
+  retrieveData(url, function(response) {
+    team = JSON.parse(response);
+    // add call to team participants handling here
+  });
+}
+
+function retrieveData(file, callback) {
+  let x = new XMLHttpRequest();
   x.onreadystatechange = function() {
     if (x.readyState == 4 && x.status == 200) {
       callback(x.responseText);
@@ -68,6 +82,38 @@ function xhr(file, callback) {
   }
   x.open('GET', file);
   x.send();
+}
+
+function handleParticipant() {
+  let fill = document.getElementById("fill");
+  let text = document.getElementById("text");
+  if (fill && text) {
+    fill.style.width = calculatePercentage();
+    text.innerHTML = "$" + participant.totalRaisedAmount;
+    text.innerHTML += " / ";
+    text.innerHTML += "$" + participant.fundraisingGoal;
+  }
+}
+
+function handleDonations() {
+  let donationListElement = document.getElementById("donations");
+  if (donationListElement) {
+    clearChildren(donationListElement);
+    for (let d of donations) {
+      let itemText = d.donationAmount ? "$" + d.donationAmount : "Amount hidden";
+      itemText += " - ";
+      itemText += d.donorName ? d.donorName : "Anonymous";
+      let textNode = document.createTextNode(itemText);
+      let listItem = document.createElement("li");
+      listItem.appendChild(textNode);
+      donationListElement.appendChild(listItem);
+    }
+  }
+}
+
+function calculatePercentage() {
+  let p = participant.totalRaisedAmount / participant.fundraisingGoal * 100;
+  return percentString(p.toFixed(0));
 }
 
 function clearChildren(e) {
