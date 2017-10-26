@@ -50,6 +50,22 @@ function refreshDonations() {
   });
 }
 
+function refreshTeam() {
+  let url = TEAM_URL + participant.teamID;
+  getDataAndProcessIt(url, function(response) {
+    team = JSON.parse(response);
+    // add call to team handling here
+  });
+}
+
+function refreshTeamParticipants() {
+  let url = TEAM_PARTICIPANTS_URL + participant.teamID;
+  getDataAndProcessIt(url, function(response) {
+    team = JSON.parse(response);
+    // add call to team participants handling here
+  });
+}
+
 function getDataAndProcessIt(file, callback) {
   let x = new XMLHttpRequest();
   x.onreadystatechange = function() {
