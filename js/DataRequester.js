@@ -30,7 +30,7 @@ function refreshAllData() {
 }
 
 function getId() {
-  id = window.location.search.slice(1);
+  id = window.location.search.slice(4);
   if (id.length != 6) {
     throw "Invalid ID";
   }

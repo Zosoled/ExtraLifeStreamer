@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <title>ExtraLifeStreamer</title>
+    <meta charset="UTF-8">
+    <script src="js/LaunchControl.js"></script>
+  </head>
+  <body>
+    <h1>ExtraLifeStreamer</h1>
+    <h2>Enter your Extra Life participant ID below and launch your desired
+        modules to add them as browser sources in your streaming software.</h2>
+    <form method="GET" target="_blank">
+      <label for="id">Participant ID</label>
+      <input name="id" type="text" onkeyup="LaunchControl.formatId(this)">
+      <fieldset>
+        <legend>Click to Launch</legend>
+        <input type="submit" value="GoalMeter" formaction="html/GoalMeter.html">
+        <input type="submit" value="DonationList" formaction="html/DonationList.html">
+      </fieldset>
+    </form>
+  </body>
 </html>

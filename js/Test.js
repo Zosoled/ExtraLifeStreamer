@@ -1,6 +1,6 @@
 var Test = (function() {
-  var testSuite = new Set();
-  var failures = new Set();
+  let testSuite = new Set();
+  let failures = new Set();
   
   window.addEventListener('error', function(e) {
     failures.add(e);
@@ -8,9 +8,9 @@ var Test = (function() {
     e.preventDefault();
   });
   
-  var pub = {
+  let pub = {
     file: filepath => {
-      var x = document.createElement('script');
+      let x = document.createElement('script');
       x.src = filepath;
       document.head.appendChild(x);
     },
@@ -21,8 +21,8 @@ var Test = (function() {
     
     assert: (expected, actual) => {
       if (expected != actual) {
-        var msg = 'Expected ' + expected + '. Actual was ' + actual;
-        var e = new Error(msg);
+        let msg = 'Expected ' + expected + '. Actual was ' + actual;
+        let e = new Error(msg);
         failures.add(e);
         console.error(e);
       }
@@ -30,7 +30,7 @@ var Test = (function() {
   }
   
   pub.run = () => {
-    for (var t of testSuite) {
+    for (let t of testSuite) {
       t();
     }
     if (failures.size == 0) {
