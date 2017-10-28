@@ -50,7 +50,7 @@ function handleParticipant() {
     let fill = document.getElementById("fill");
     let text = document.getElementById("text");
     if (fill && text) {
-      fill.style.width = profile.percentRaised();
+      fill.style.width = profile.participantPercentRaised();
       text.innerHTML = "$" + profile.data.participant.totalRaisedAmount;
       text.innerHTML += " / ";
       text.innerHTML += "$" + profile.data.participant.fundraisingGoal;
