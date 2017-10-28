@@ -59,11 +59,11 @@ function handleParticipant() {
 }
 
 function handleDonations() {
-  if (profile.donations) {
+  if (profile.data.participantDonations) {
     let donationListElement = document.getElementById("donations");
     if (donationListElement) {
       clearChildren(donationListElement);
-      for (let d of profile.donations) {
+      for (let d of profile.data.participantDonations) {
         let itemText = d.donationAmount ? "$" + d.donationAmount : "Amount hidden";
         itemText += " - ";
         itemText += d.donorName ? d.donorName : "Anonymous";
