@@ -1,4 +1,4 @@
-include("../js/ParticipantProfile.js");
+include("js/ParticipantProfile.js");
 
 const BASE_URL = "https://www.extra-life.org/index.cfm?&format=json&fuseaction=donordrive.";
 const DARK_BLUE_HEX = "#1d4c6c";
@@ -8,14 +8,8 @@ const LIGHT_GREEN_HEX = "#96d400";
 let id;
 let profile;
 
-function main() {
-  profile = new ParticipantProfile();
-  getId();
-  refreshAllData();
-  setInterval(refreshAllData, 60000);
-}
-
 function getId() {
+  profile = new ParticipantProfile();
   id = window.location.search.slice(4);
   if (id.length != 6) {
     throw "Invalid ID";
@@ -86,10 +80,4 @@ function clearChildren(e) {
   while (e.hasChildNodes()) {
     e.removeChild(e.lastChild);
   }
-}
-
-function include(filepath) {
-  let x = document.createElement('script');
-  x.src = filepath;
-  document.head.insertBefore(x, document.head.firstChild);
 }

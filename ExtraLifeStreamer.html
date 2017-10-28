@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ExtraLifeStreamer</title>
+    <script src="js/ExtraLifeStreamer.js"></script>
     <meta charset="UTF-8">
-    <script src="js/LaunchControl.js"></script>
+    <title>ExtraLifeStreamer</title>
   </head>
   <body>
     <h1>ExtraLifeStreamer</h1>
@@ -11,7 +11,7 @@
         modules to add them as browser sources in your streaming software.</h2>
     <form method="GET" target="_blank">
       <label for="id">Participant ID</label>
-      <input name="id" type="text" onkeyup="LaunchControl.formatId(this)">
+      <input name="id" type="text" onkeyup="formatId(this)">
       <fieldset>
         <legend>Click to Launch</legend>
         <input type="submit" value="GoalMeter" formaction="html/GoalMeter.html">
