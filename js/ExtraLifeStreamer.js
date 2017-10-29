@@ -1,4 +1,7 @@
 include("js/DataRequester.js");
+const DARK_BLUE_HEX = "#1d4c6c";
+const LIGHT_BLUE_HEX = "#23c1e8";
+const LIGHT_GREEN_HEX = "#96d400";
 
 function main() {
   getId();

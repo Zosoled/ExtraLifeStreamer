@@ -1,9 +1,6 @@
 include("js/ParticipantProfile.js");
 
 const BASE_URL = "https://www.extra-life.org/index.cfm?&format=json&fuseaction=donordrive.";
-const DARK_BLUE_HEX = "#1d4c6c";
-const LIGHT_BLUE_HEX = "#23c1e8";
-const LIGHT_GREEN_HEX = "#96d400";
 
 let id;
 let profile;
