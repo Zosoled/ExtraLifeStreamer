@@ -22,10 +22,14 @@ function initializeSystem() {
 }
 
 function startMonitoring() {
-  requester.refreshAllData();
-  populater.populatePageElements();
-  let intervalId1 = setInterval(function(){requester.refreshAllData()}, 60000);
-  let intervalId2 = setInterval(function(){populater.populatePageElements()}, 0);
+  (function refresh() {
+    requester.refreshAllData();
+    setTimeout(refresh, 60000);
+  })();
+  (function populate() {
+    populater.populatePageElements();
+    setTimeout(populate, 0);
+  })();
 }
 
 function formatId(element) {
