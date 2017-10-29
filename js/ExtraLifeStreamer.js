@@ -1,10 +1,6 @@
 include("js/DataRequester.js");
 include("js/PagePopulater.js");
 
-const DARK_BLUE_HEX = "#1d4c6c";
-const LIGHT_BLUE_HEX = "#23c1e8";
-const LIGHT_GREEN_HEX = "#96d400";
-
 let id;
 let profile;
 let requester;
@@ -22,18 +18,37 @@ function initializeSystem() {
 }
 
 function startMonitoring() {
-  requester.refreshAllData();
-  populater.populatePageElements();
-  let intervalId1 = setInterval(function(){requester.refreshAllData()}, 60000);
-  let intervalId2 = setInterval(function(){populater.populatePageElements()}, 0);
+  (function refresh() {
+    requester.refreshAllData();
+    setTimeout(refresh, 60000);
+  })();
+  (function populate() {
+    populater.populatePageElements();
+    setTimeout(populate, 0);
+  })();
 }
 
 function formatId(element) {
-  let id = element.value.replace(/\D/, "");
-  if (id.length == 0) {
+  let e = element.value.replace(/\D/, "");
+  if (e.length == 0) {
     element.value = "";
   } else {
-    element.value = id.substring(0,6);
+    element.value = e.substring(0,6);
+  }
+  validateId();
+}
+
+function validateId() {
+  let id = document.getElementById("id");
+  let buttons = document.getElementsByTagName("button");
+  if (id.value.length == 6) {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].removeAttribute("disabled");
+    }
+  } else {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = "disabled";
+    }
   }
 }
 
