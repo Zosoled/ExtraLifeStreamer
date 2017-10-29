@@ -1,10 +1,6 @@
 include("js/DataRequester.js");
 include("js/PagePopulater.js");
 
-const DARK_BLUE_HEX = "#1d4c6c";
-const LIGHT_BLUE_HEX = "#23c1e8";
-const LIGHT_GREEN_HEX = "#96d400";
-
 let id;
 let profile;
 let requester;
@@ -38,6 +34,21 @@ function formatId(element) {
     element.value = "";
   } else {
     element.value = e.substring(0,6);
+  }
+  validateId();
+}
+
+function validateId() {
+  let id = document.getElementById("id");
+  let buttons = document.getElementsByTagName("button");
+  if (id.value.length == 6) {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].removeAttribute("disabled");
+    }
+  } else {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = "disabled";
+    }
   }
 }
 
