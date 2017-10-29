@@ -1,12 +1,31 @@
 include("js/DataRequester.js");
+include("js/PagePopulater.js");
+
 const DARK_BLUE_HEX = "#1d4c6c";
 const LIGHT_BLUE_HEX = "#23c1e8";
 const LIGHT_GREEN_HEX = "#96d400";
 
+let id;
+let profile;
+let requester;
+let populater;
+
 function main() {
-  getId();
-  refreshAllData();
-  setInterval(refreshAllData, 60000);
+  initializeSystem();
+  startMonitoring();
+}
+
+function initializeSystem() {
+  profile = new ParticipantProfile();
+  requester = new DataRequester(profile);
+  populater = new PagePopulater(profile);
+}
+
+function startMonitoring() {
+  requester.refreshAllData();
+  populater.populatePageElements();
+  let intervalId1 = setInterval(function(){requester.refreshAllData()}, 60000);
+  let intervalId2 = setInterval(function(){populater.populatePageElements()}, 0);
 }
 
 function formatId(element) {
