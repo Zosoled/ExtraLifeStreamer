@@ -33,11 +33,11 @@ function startMonitoring() {
 }
 
 function formatId(element) {
-  let id = element.value.replace(/\D/, "");
-  if (id.length == 0) {
+  let e = element.value.replace(/\D/, "");
+  if (e.length == 0) {
     element.value = "";
   } else {
-    element.value = id.substring(0,6);
+    element.value = e.substring(0,6);
   }
 }
 
