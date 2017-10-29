@@ -1,23 +1,31 @@
 @charset "UTF-8";
 @import "fonts.css";
+:root {
+  --DARK_BLUE_HEX: #1d4c6c;
+  --DARKER_BLUE_HEX: #0d3c5c;
+  --LIGHT_BLUE_HEX: #23c1e8;
+  --LIGHT_GREEN_HEX: #96d400;
+  --LIGHTER_GREEN_HEX: #a6e410;
+  --LIGHTEST_GREEN_HEX: #b6f420;  
+}
 
 html, body, div, span {
   border: 0;
-  color: #000;
+  color: black;
   line-height: 1em;
   margin: 0;
   padding: 0;
 }
 
 .meter {
-  background-color: #1d4c6c;
+  background-color: var(--DARK_BLUE_HEX);
   background-image: repeating-linear-gradient(
     315deg,
-    #1d4c6c 0%,
-    #1d4c6c 10%,
-    #0d3c5c 10%,
-    #0d3c5c 20%);
-  border: 6px solid #23c1e8;
+    var(--DARK_BLUE_HEX) 0%,
+    var(--DARK_BLUE_HEX) 10%,
+    var(--DARKER_BLUE_HEX) 10%,
+    var(--DARKER_BLUE_HEX) 20%);
+  border: 6px solid var(--LIGHT_BLUE_HEX);
   border-radius: 2em;
   overflow: hidden;
 }
@@ -25,16 +33,16 @@ html, body, div, span {
 .meter-fill {
   background-image: linear-gradient(
     0deg,
-    #96d400 0%,
-    #a6e410 40%,
-    #b6f420 65%,
-    #a6e410 85%,
-    #96d400 100%);
+    var(--LIGHT_GREEN_HEX) 0%,
+    var(--LIGHTER_GREEN_HEX) 40%,
+    var(--LIGHTEST_GREEN_HEX) 65%,
+    var(--LIGHTER_GREEN_HEX) 85%,
+    var(--LIGHT_GREEN_HEX) 100%);
   width: 0;
 }
 
 .meter-text {
-  color: #fff;
+  color: white;
   font: italic 2em Furore;
   overflow: visible;
   padding: .5em;
@@ -43,9 +51,9 @@ html, body, div, span {
 
 .stroke {
   text-shadow:
-    -1px -1px 0 #1d4c6c,
-    1px -1px 0 #1d4c6c,
-    -1px 1px 0 #1d4c6c,
-    1px 1px 0 #1d4c6c;
+    -1px -1px 0 var(--DARK_BLUE_HEX),
+    1px -1px 0 var(--DARK_BLUE_HEX),
+    -1px 1px 0 var(--DARK_BLUE_HEX),
+    1px 1px 0 var(--DARK_BLUE_HEX);
 }
   
