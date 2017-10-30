@@ -146,6 +146,25 @@ ul li {
   border-radius: 2em;
 }
 
-.card-glass-darkblue li {
+.border-smooth-none {
+  border-radius: 0.5em;
+}
+
+.border-smooth-darkblue {
+  border: 6px solid var(--DARK_BLUE);
+  border-radius: 0.5em;
+}
+
+.border-smooth-lightblue {
+  border: 6px solid var(--LIGHT_BLUE);
+  border-radius: 0.5em;
+}
+
+.border-smooth-lightgreen {
+  border: 6px solid var(--LIGHT_GREEN);
+  border-radius: 0.5em;
+}
+
+.card-glass-darkblue {
   background-color: var(--DARK_BLUE_GLASS)
 }
