@@ -1,12 +1,20 @@
 @charset "UTF-8";
 @import "fonts.css";
 :root {
-  --DARK_BLUE_HEX: #1d4c6c;
-  --DARKER_BLUE_HEX: #0d3c5c;
-  --LIGHT_BLUE_HEX: #23c1e8;
-  --LIGHT_GREEN_HEX: #96d400;
-  --LIGHTER_GREEN_HEX: #a6e410;
-  --LIGHTEST_GREEN_HEX: #b6f420;  
+  --DARK_BLUE: rgba(29, 76, 108, 1);
+  --DARKER_BLUE: rgba(13, 60, 92, 1);
+  --DARKEST_BLUE: rgba(0, 44, 76, 1);
+  --DARK_BLUE_GLASS: rgba(29, 76, 108, 0.5);
+
+  --LIGHT_BLUE: rgba(35, 193, 232, 1);
+  --LIGHTER_BLUE: rgba(51, 209, 248, 1);
+  --LIGHTEST_BLUE: rgba(67, 225, 255, 1);
+  --LIGHT_BLUE_GLASS: rgba(35, 193, 232, 0.5);
+
+  --LIGHT_GREEN: rgba(150, 212, 0, 1);
+  --LIGHTER_GREEN: rgba(166, 228, 16, 1);
+  --LIGHTEST_GREEN: rgba(182, 244, 32, 1);
+  --LIGHT_GREEN_GLASS: rgba(150, 212, 0, 0.5); 
 }
 
 html, body, div, span {
