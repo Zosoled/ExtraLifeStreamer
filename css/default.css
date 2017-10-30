@@ -1,15 +1,23 @@
 @charset "UTF-8";
 @import "fonts.css";
 :root {
-  --DARK_BLUE_HEX: #1d4c6c;
-  --DARKER_BLUE_HEX: #0d3c5c;
-  --LIGHT_BLUE_HEX: #23c1e8;
-  --LIGHT_GREEN_HEX: #96d400;
-  --LIGHTER_GREEN_HEX: #a6e410;
-  --LIGHTEST_GREEN_HEX: #b6f420;  
+  --DARK_BLUE: rgba(29, 76, 108, 1);
+  --DARKER_BLUE: rgba(13, 60, 92, 1);
+  --DARKEST_BLUE: rgba(0, 44, 76, 1);
+  --DARK_BLUE_GLASS: rgba(29, 76, 108, 0.8);
+
+  --LIGHT_BLUE: rgba(35, 193, 232, 1);
+  --LIGHTER_BLUE: rgba(51, 209, 248, 1);
+  --LIGHTEST_BLUE: rgba(67, 225, 255, 1);
+  --LIGHT_BLUE_GLASS: rgba(35, 193, 232, 0.5);
+
+  --LIGHT_GREEN: rgba(150, 212, 0, 1);
+  --LIGHTER_GREEN: rgba(166, 228, 16, 1);
+  --LIGHTEST_GREEN: rgba(182, 244, 32, 1);
+  --LIGHT_GREEN_GLASS: rgba(150, 212, 0, 0.5); 
 }
 
-html, body, div, span {
+html, body, div, span, ul, li {
   border: 0;
   color: black;
   line-height: 1em;
@@ -17,27 +25,25 @@ html, body, div, span {
   padding: 0;
 }
 
+ul {
+  list-style: none;
+}
+
+ul li {
+  color: white;
+  font: 2em Cantarell;
+  margin-bottom: 0.1em;
+  overflow: visible;
+  padding: .5em;
+  white-space: nowrap;
+  width: 15em;
+}
+
 .meter {
-  background-color: var(--DARK_BLUE_HEX);
-  background-image: repeating-linear-gradient(
-    315deg,
-    var(--DARK_BLUE_HEX) 0%,
-    var(--DARK_BLUE_HEX) 10%,
-    var(--DARKER_BLUE_HEX) 10%,
-    var(--DARKER_BLUE_HEX) 20%);
-  border: 6px solid var(--LIGHT_BLUE_HEX);
-  border-radius: 2em;
   overflow: hidden;
 }
 
 .meter-fill {
-  background-image: linear-gradient(
-    0deg,
-    var(--LIGHT_GREEN_HEX) 0%,
-    var(--LIGHTER_GREEN_HEX) 40%,
-    var(--LIGHTEST_GREEN_HEX) 65%,
-    var(--LIGHTER_GREEN_HEX) 85%,
-    var(--LIGHT_GREEN_HEX) 100%);
   width: 0;
 }
 
@@ -51,9 +57,114 @@ html, body, div, span {
 
 .stroke {
   text-shadow:
-    -1px -1px 0 var(--DARK_BLUE_HEX),
-    1px -1px 0 var(--DARK_BLUE_HEX),
-    -1px 1px 0 var(--DARK_BLUE_HEX),
-    1px 1px 0 var(--DARK_BLUE_HEX);
+    -1px -1px 0 var(--DARK_BLUE),
+    1px -1px 0 var(--DARK_BLUE),
+    -1px 1px 0 var(--DARK_BLUE),
+    1px 1px 0 var(--DARK_BLUE);
 }
-  
+
+.barber-darkblue {
+  background-color: var(--DARK_BLUE);
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--DARK_BLUE) 0%,
+    var(--DARK_BLUE) 10%,
+    var(--DARKER_BLUE) 10%,
+    var(--DARKER_BLUE) 20%);
+}
+
+.barber-lightblue {
+  background-color: var(--LIGHT_BLUE);
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--LIGHT_BLUE) 0%,
+    var(--LIGHT_BLUE) 10%,
+    var(--LIGHTER_BLUE) 10%,
+    var(--LIGHTER_BLUE) 20%);
+  border-radius: 2em;
+}
+
+.barber-lightgreen {
+  background-color: var(--LIGHT_GREEN);
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--LIGHT_GREEN) 0%,
+    var(--LIGHT_GREEN) 10%,
+    var(--LIGHTER_GREEN) 10%,
+    var(--LIGHTER_GREEN) 20%);
+}
+
+.bubble-horizontal-darkblue {
+  background-color: var(--DARK_BLUE);
+  background-image: linear-gradient(
+    0deg,
+    var(--DARKEST_BLUE) 0%,
+    var(--DARKER_BLUE) 40%,
+    var(--DARK_BLUE) 65%,
+    var(--DARKER_BLUE) 85%,
+    var(--DARKEST_BLUE) 100%);
+}
+
+.bubble-horizontal-lightblue {
+  background-color: var(--LIGHT_BLUE);
+  background-image: linear-gradient(
+    0deg,
+    var(--LIGHT_BLUE) 0%,
+    var(--LIGHTER_BLUE) 40%,
+    var(--LIGHTEST_BLUE) 65%,
+    var(--LIGHTER_BLUE) 85%,
+    var(--LIGHT_BLUE) 100%);
+}
+
+.bubble-horizontal-lightgreen {
+  background-color: var(--LIGHT_GREEN);
+  background-image: linear-gradient(
+    0deg,
+    var(--LIGHT_GREEN) 0%,
+    var(--LIGHTER_GREEN) 40%,
+    var(--LIGHTEST_GREEN) 65%,
+    var(--LIGHTER_GREEN) 85%,
+    var(--LIGHT_GREEN) 100%);
+}
+
+.border-round-none {
+  border-radius: 2em;
+}
+
+.border-round-darkblue {
+  border: 6px solid var(--DARK_BLUE);
+  border-radius: 2em;
+}
+
+.border-round-lightblue {
+  border: 6px solid var(--LIGHT_BLUE);
+  border-radius: 2em;
+}
+
+.border-round-lightgreen {
+  border: 6px solid var(--LIGHT_GREEN);
+  border-radius: 2em;
+}
+
+.border-smooth-none {
+  border-radius: 0.5em;
+}
+
+.border-smooth-darkblue {
+  border: 6px solid var(--DARK_BLUE);
+  border-radius: 0.5em;
+}
+
+.border-smooth-lightblue {
+  border: 6px solid var(--LIGHT_BLUE);
+  border-radius: 0.5em;
+}
+
+.border-smooth-lightgreen {
+  border: 6px solid var(--LIGHT_GREEN);
+  border-radius: 0.5em;
+}
+
+.card-glass-darkblue {
+  background-color: var(--DARK_BLUE_GLASS)
+}
