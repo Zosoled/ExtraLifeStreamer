@@ -25,6 +25,19 @@ html, body, div, span, ul, li {
   padding: 0;
 }
 
+ul {
+  list-style: none;
+}
+
+ul li {
+  color: white;
+  font: 2em Cantarell;
+  overflow: visible;
+  padding: .5em;
+  white-space: nowrap;
+  width: 20em;
+}
+
 .meter {
   background-color: var(--DARK_BLUE_HEX);
   background-image: repeating-linear-gradient(
