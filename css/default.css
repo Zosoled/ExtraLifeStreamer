@@ -4,7 +4,7 @@
   --DARK_BLUE: rgba(29, 76, 108, 1);
   --DARKER_BLUE: rgba(13, 60, 92, 1);
   --DARKEST_BLUE: rgba(0, 44, 76, 1);
-  --DARK_BLUE_GLASS: rgba(29, 76, 108, 0.5);
+  --DARK_BLUE_GLASS: rgba(29, 76, 108, 0.8);
 
   --LIGHT_BLUE: rgba(35, 193, 232, 1);
   --LIGHTER_BLUE: rgba(51, 209, 248, 1);
@@ -32,10 +32,11 @@ ul {
 ul li {
   color: white;
   font: 2em Cantarell;
+  margin-bottom: 0.1em;
   overflow: visible;
   padding: .5em;
   white-space: nowrap;
-  width: 20em;
+  width: 15em;
 }
 
 .meter {
