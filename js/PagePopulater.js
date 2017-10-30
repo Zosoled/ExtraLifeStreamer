@@ -34,6 +34,9 @@ PagePopulater.prototype.handleDonations = function () {
         let textNode = document.createTextNode(itemText);
         let listItem = document.createElement("li");
         listItem.appendChild(textNode);
+        listItem.classList.add("border-smooth-darkblue");
+        listItem.classList.add("card-glass-darkblue");
+        listItem.classList.add("stroke");
         donationListElement.appendChild(listItem);
       }
     }
