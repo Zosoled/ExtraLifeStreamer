@@ -17,7 +17,7 @@
   --LIGHT_GREEN_GLASS: rgba(150, 212, 0, 0.5); 
 }
 
-html, body, div, span {
+html, body, div, span, ul, li {
   border: 0;
   color: black;
   line-height: 1em;
