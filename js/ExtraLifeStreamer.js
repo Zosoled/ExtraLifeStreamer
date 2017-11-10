@@ -64,7 +64,7 @@ function include(file) {
 function fileNotLoaded(file) {
   let scripts = document.head.getElementsByTagName("script");
   for (let s = 0; s < scripts.length; s++) {
-    if (scripts[s].attributes.src.value.includes(file)) {
+    if (scripts[s].attributes.src && scripts[s].attributes.src.value.includes(file)) {
       return false;
     }
   }
