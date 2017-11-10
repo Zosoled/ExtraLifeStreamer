@@ -2,6 +2,7 @@ include("js/ParticipantProfile.js");
 
 function PagePopulater(p) {
   this.profile = p;
+  this.drawLineChart();
 }
 
 PagePopulater.prototype.populatePageElements = function () {
@@ -42,6 +43,22 @@ PagePopulater.prototype.handleDonations = function () {
     }
   }
 }
+
+//testing Chart.js integration
+PagePopulater.prototype.drawLineChart = function () {
+  var ctx = "donationLine";
+  var lineChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["red", "orange", "yellow", "green", "blue", "indigo", "violet"],
+      datasets: [
+        {
+          data: [0,3,1,2]
+        }
+      ]
+    }
+  });
+}  
 
 function clearChildren(e) {
   while (e.hasChildNodes()) {
