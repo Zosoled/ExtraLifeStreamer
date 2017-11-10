@@ -1,5 +1,6 @@
 include("js/DataRequester.js");
 include("js/PagePopulater.js");
+include("lib/Chart.bundle.min.js");
 
 let id;
 let profile;
