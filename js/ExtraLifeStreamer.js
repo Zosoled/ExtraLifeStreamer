@@ -12,14 +12,23 @@ function main() {
 }
 
 function initializeSystem() {
+  id = getId();
   profile = new ParticipantProfile();
   requester = new DataRequester(profile);
   populater = new PagePopulater(profile);
 }
 
+function getId () {
+  let urlId = window.location.search.slice(4);
+  if (urlId.length != 6) {
+    throw "Invalid ID";
+  }
+  return urlId;
+}
+
 function startMonitoring() {
   (function refresh() {
-    requester.refreshAllData();
+    refreshAllData();
     setTimeout(refresh, 60000);
   })();
   (function populate() {
@@ -68,4 +77,12 @@ function fileNotLoaded(file) {
     }
   }
   return true;
+}
+
+function refreshAllData() {
+  for (let endpoint of Object.keys(profile.data)) {
+    requester.retrieveData(endpoint + "&participantID=", id, function(response) {
+      profile.data[endpoint] = JSON.parse(response);
+    });
+  }
 }
