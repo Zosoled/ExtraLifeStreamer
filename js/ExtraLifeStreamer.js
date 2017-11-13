@@ -12,14 +12,23 @@ function main() {
 }
 
 function initializeSystem() {
+  id = getId();
   profile = new ParticipantProfile();
   requester = new DataRequester(profile);
   populater = new PagePopulater(profile);
 }
 
+function getId () {
+  let urlId = window.location.search.slice(4);
+  if (urlId.length != 6) {
+    throw "Invalid ID";
+  }
+  return urlId;
+}
+
 function startMonitoring() {
   (function refresh() {
-    requester.refreshAllData();
+    refreshAllData();
     setTimeout(refresh, 60000);
   })();
   (function populate() {
@@ -68,4 +77,18 @@ function fileNotLoaded(file) {
     }
   }
   return true;
+}
+
+function refreshAllData() {
+  for (let endpoint of Object.keys(profile.data)) {
+    if (endpoint.includes("team") && profile.data["participant"]) {
+      requester.retrieveData(endpoint + "&teamID=", profile.data["participant"].teamID, function(response) {
+        profile.data[endpoint] = JSON.parse(response);
+      });
+    } else if (endpoint.includes("participant")) {
+      requester.retrieveData(endpoint + "&participantID=", id, function (response) {
+        profile.data[endpoint] = JSON.parse(response);
+      });
+    }
+  }
 }
