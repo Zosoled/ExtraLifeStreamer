@@ -81,8 +81,14 @@ function fileNotLoaded(file) {
 
 function refreshAllData() {
   for (let endpoint of Object.keys(profile.data)) {
-    requester.retrieveData(endpoint + "&participantID=", id, function(response) {
-      profile.data[endpoint] = JSON.parse(response);
-    });
+    if (endpoint.includes("team") && profile.data["participant"]) {
+      requester.retrieveData(endpoint + "&teamID=", profile.data["participant"].teamID, function(response) {
+        profile.data[endpoint] = JSON.parse(response);
+      });
+    } else if (endpoint.includes("participant")) {
+      requester.retrieveData(endpoint + "&participantID=", id, function (response) {
+        profile.data[endpoint] = JSON.parse(response);
+      });
+    }
   }
 }
