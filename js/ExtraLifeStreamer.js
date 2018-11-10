@@ -1,20 +1,23 @@
 include("js/DataRequester.js");
+include("js/DataMonitor.js");
 include("js/PagePopulater.js");
 
 let id;
+let baseUrl = "https://www.extra-life.org/api";
 let profile;
-let requester;
 let populater;
 
 function main() {
   initializeSystem();
-  startMonitoring();
+  let pp = new DataMonitor(baseUrl + "/participants/" + id);
+  pp.start(function (data) {
+	  console.log(data);
+  });
 }
 
 function initializeSystem() {
   id = getId();
   profile = new ParticipantProfile();
-  requester = new DataRequester(profile);
   populater = new PagePopulater(profile);
 }
 
@@ -82,17 +85,17 @@ function fileNotLoaded(file) {
 function refreshAllData() {
   for (let endpoint of Object.keys(profile.data)) {
     if (endpoint.includes("teams") && profile.data["participant"]) {
-      requester.retrieveData("/teams/" + profile.data["participant"].teamID, function(response) {
+      Xhr.get(baseUrl + "/teams/" + profile.data["participant"].teamID, function(response) {
         profile.data[endpoint] = JSON.parse(response);
       });
     }
     if (endpoint.includes("participant")) {
-      requester.retrieveData("/participants/" + id, function (response) {
+      Xhr.get(baseUrl + "/participants/" + id, function (response) {
         profile.data[endpoint] = JSON.parse(response);
       });
     }
     if (endpoint.includes("participantDonations")) {
-      requester.retrieveData("/participants/" + id + "/donations", function (response) {
+      Xhr.get(baseUrl + "/participants/" + id + "/donations", function (response) {
         profile.data[endpoint] = JSON.parse(response);
       });
     }
