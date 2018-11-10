@@ -29,7 +29,7 @@ function getId () {
 function startMonitoring() {
   (function refresh() {
     refreshAllData();
-    setTimeout(refresh, 60000);
+    setTimeout(refresh, 15000);
   })();
   (function populate() {
     populater.populatePageElements();
@@ -81,12 +81,18 @@ function fileNotLoaded(file) {
 
 function refreshAllData() {
   for (let endpoint of Object.keys(profile.data)) {
-    if (endpoint.includes("team") && profile.data["participant"]) {
-      requester.retrieveData(endpoint + "&teamID=", profile.data["participant"].teamID, function(response) {
+    if (endpoint.includes("teams") && profile.data["participant"]) {
+      requester.retrieveData("/teams/" + profile.data["participant"].teamID, function(response) {
         profile.data[endpoint] = JSON.parse(response);
       });
-    } else if (endpoint.includes("participant")) {
-      requester.retrieveData(endpoint + "&participantID=", id, function (response) {
+    }
+    if (endpoint.includes("participant")) {
+      requester.retrieveData("/participants/" + id, function (response) {
+        profile.data[endpoint] = JSON.parse(response);
+      });
+    }
+    if (endpoint.includes("participantDonations")) {
+      requester.retrieveData("/participants/" + id + "/donations", function (response) {
         profile.data[endpoint] = JSON.parse(response);
       });
     }

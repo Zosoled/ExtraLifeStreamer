@@ -8,7 +8,7 @@ function ParticipantProfile() {
 }
 
 ParticipantProfile.prototype.participantPercentRaised = function() {
-  return this.percentRaised(this.data.participant.totalRaisedAmount, this.data.participant.fundraisingGoal);
+  return this.percentRaised(this.data.participant.sumDonations, this.data.participant.fundraisingGoal);
 };
 
 ParticipantProfile.prototype.teamPercentRaised = function() {
