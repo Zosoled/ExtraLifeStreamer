@@ -1,11 +1,4 @@
-function ParticipantProfile() {
-  this.data = {
-    "participant": null,
-    "participantDonations": null,
-    "team": null,
-    "teamParticipants": null
-  }
-}
+function ParticipantProfile() { }
 
 ParticipantProfile.prototype.participantPercentRaised = function() {
   return this.percentRaised(this.data.participant.sumDonations, this.data.participant.fundraisingGoal);
