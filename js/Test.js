@@ -21,12 +21,11 @@ var Test = (function() {
 		},
 		
 		assert: (expected, actual) => {
-			let msg = 'Expected ' + expected + '. Actual was ' + actual;
+			let msg = 'Expected ' + expected + '. Actual was ' + actual + '.';
 			if (expected == actual) {
 				successes.add(msg);
 			} else {
-				failures.add(msg);
-				console.error(msg);
+				failures.add(msg + '\n' + console.trace());
 			}
 		},
 		
