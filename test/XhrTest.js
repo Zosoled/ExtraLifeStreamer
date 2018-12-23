@@ -1,5 +1,7 @@
-Test.file("../js/DataRequester.js");
+Test.file("../js/Xhr.js");
 
-Test.method(function firstTest() {
-  Test.assert("249219", PARTICIPANT_ID);
+Test.method(function connectionAttempted() {
+	Xhr.get('https://api.github.com', function(response) {
+		Test.assertTrue(response);
+	});
 });
